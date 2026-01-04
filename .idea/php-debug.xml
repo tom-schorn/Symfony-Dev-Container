@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PhpDebugGeneral" listening_started="true">
+    <option name="break_at_first_line" value="false" />
+    <option name="force_break_at_first_line" value="false" />
+  </component>
+  <component name="XDebugProxy">
+    <option name="idekey" value="PHPSTORM" />
+  </component>
+</project>

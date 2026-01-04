@@ -1,0 +1,51 @@
+{
+  "name": "Symfony 7.4 Development Container",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "php",
+  "workspaceFolder": "/workspace",
+
+  "customizations": {
+    "jetbrains": {
+      "backend": "PhpStorm"
+    }
+  },
+
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/github-cli:1": {
+      "version": "latest"
+    }
+  },
+
+  "forwardPorts": [
+    8000,
+    8025,
+    6379,
+    9003
+  ],
+
+  "portsAttributes": {
+    "8000": {
+      "label": "Symfony Dev Server",
+      "onAutoForward": "notify"
+    },
+    "8025": {
+      "label": "Mailhog Web UI",
+      "onAutoForward": "silent"
+    },
+    "6379": {
+      "label": "Redis",
+      "onAutoForward": "silent"
+    },
+    "9003": {
+      "label": "Xdebug",
+      "onAutoForward": "silent"
+    }
+  },
+
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
+
+  "remoteUser": "vscode"
+}
