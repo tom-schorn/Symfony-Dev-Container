@@ -6,16 +6,12 @@
 
   "customizations": {
     "jetbrains": {
-      "backend": "PhpStorm"
-    }
-  },
-
-  "features": {
-    "ghcr.io/devcontainers/features/git:1": {
-      "version": "latest"
-    },
-    "ghcr.io/devcontainers/features/github-cli:1": {
-      "version": "latest"
+      "backend": "PhpStorm",
+      "plugins": [
+        "com.jetbrains.php.tools.quality.phpstan",
+        "com.jetbrains.php.psalm",
+        "fr.adrienbrault.idea.symfony2plugin"
+      ]
     }
   },
 
@@ -35,5 +31,12 @@
     }
   },
 
-  "remoteUser": "vscode"
+  "postCreateCommand": "echo 'DevContainer ready for PHPStorm 2025.3'",
+
+  "remoteUser": "vscode",
+
+  "containerEnv": {
+    "XDEBUG_MODE": "develop,debug,coverage",
+    "XDEBUG_CONFIG": "client_host=host.docker.internal"
+  }
 }

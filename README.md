@@ -1,6 +1,6 @@
 # Symfony 7.4 Development Container
 
-A complete DevContainer for Symfony 7.4 development with PHP 8.2, optimized for PHPStorm.
+A complete DevContainer for Symfony 7.4 development with PHP 8.2, optimized for **PHPStorm 2025.3**.
 
 ## Features
 
@@ -13,8 +13,13 @@ A complete DevContainer for Symfony 7.4 development with PHP 8.2, optimized for 
 
 ## Prerequisites
 
-- [Docker](https://www.docker.com/products/docker-desktop/)
-- [JetBrains Gateway](https://www.jetbrains.com/remote-development/gateway/) or PHPStorm with Remote Development Plugin
+- [Docker](https://www.docker.com/products/docker-desktop/) installed and running
+- [PHPStorm 2025.3](https://www.jetbrains.com/phpstorm/) or [JetBrains Gateway](https://www.jetbrains.com/remote-development/gateway/)
+- **Minimum System Requirements:**
+  - 2+ CPU cores
+  - 4GB+ RAM
+  - 5GB+ disk space
+- Java 17+ (for remote development)
 - External database (optional) - MySQL, PostgreSQL, or MariaDB
 
 ## Getting Started
@@ -80,7 +85,9 @@ symfony server:start
 
 The application will be available at http://localhost:8000.
 
-## Optional: SSH Key Setup
+## Optional Tools
+
+### SSH Key Setup
 
 To use Git with SSH (for GitHub, GitLab, etc.), run the setup script inside the container:
 
@@ -94,7 +101,20 @@ This script will help you:
 - Configure SSH for GitHub/GitLab
 - Test your SSH connection
 
-**Note:** This is optional. You can also use HTTPS for Git operations.
+### GitHub CLI
+
+To install GitHub CLI for enhanced GitHub integration:
+
+```bash
+bash .devcontainer/install_github_cli.sh
+```
+
+This provides commands like:
+- `gh auth login` - Authenticate with GitHub
+- `gh repo clone` - Clone repositories
+- `gh pr create` - Create pull requests
+
+**Note:** Both tools are optional. You can use HTTPS for Git operations without them.
 
 ## Available Services
 
@@ -144,6 +164,29 @@ Most settings are already preconfigured! The repository contains prepared PHPSto
 
 **Tip**: The Symfony plugin should be activated automatically. If not, enable it under Settings → Plugins → Symfony Support.
 
+## PHPStorm 2025.3 Optimizations
+
+This DevContainer is specifically optimized for PHPStorm 2025.3 with:
+
+**Auto-installed Plugins:**
+- PHPStan - Static analysis tool
+- Psalm - Static analysis tool
+- Symfony Support - Enhanced Symfony integration
+
+**Environment Variables:**
+- Xdebug automatically configured for remote debugging
+- `XDEBUG_MODE` set for development, debugging, and coverage
+- `XDEBUG_CONFIG` configured for Docker host communication
+
+**Performance:**
+- Minimal container startup (no heavy features)
+- Cached Docker layers for fast rebuilds
+- Optimized for 2+ cores, 4GB+ RAM systems
+
+**Git Integration:**
+- Git settings automatically synced from host `.gitconfig`
+- SSH keys can be set up via `add_ssh_key_forwarding.sh`
+
 ## Useful Commands
 
 ```bash
@@ -174,10 +217,11 @@ symfony console doctrine:fixtures:load
 ```
 .
 ├── .devcontainer/
-│   ├── devcontainer.json           # DevContainer configuration
+│   ├── devcontainer.json           # DevContainer configuration (PHPStorm 2025.3)
 │   ├── docker-compose.yml          # Docker Compose setup
 │   ├── Dockerfile                  # PHP 8.2 Container Image
-│   └── add_ssh_key_forwarding.sh   # Optional SSH setup script
+│   ├── add_ssh_key_forwarding.sh   # Optional: SSH setup script
+│   └── install_github_cli.sh       # Optional: GitHub CLI installer
 ├── .idea/
 │   ├── php.xml                     # PHP 8.2 configuration
 │   ├── php-debug.xml               # Xdebug settings
