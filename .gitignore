@@ -54,3 +54,8 @@ composer.phar
 *.sqlite
 *.sqlite3
 ###< Database ###
+
+###> AI Tools ###
+CLAUDE.md
+.claude/
+###< AI Tools ###

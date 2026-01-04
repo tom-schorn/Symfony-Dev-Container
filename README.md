@@ -80,37 +80,21 @@ symfony server:start
 
 The application will be available at http://localhost:8000.
 
-## SSH Key Forwarding
+## Optional: SSH Key Setup
 
-The DevContainer automatically forwards your SSH keys from the host machine, allowing you to:
-- Push/pull from Git repositories without re-entering credentials
-- Use SSH authentication for Composer packages from private repositories
-- Access remote servers via SSH
+To use Git with SSH (for GitHub, GitLab, etc.), run the setup script inside the container:
 
-**How it works:**
-- Your `~/.ssh` directory is mounted into the container
-- The SSH agent socket is forwarded automatically
-- All SSH keys and configurations are available inside the container
+```bash
+bash .devcontainer/add_ssh_key_forwarding.sh
+```
 
-**Setup:**
-1. Ensure your SSH agent is running on your host machine:
-   ```bash
-   # Linux/macOS
-   eval "$(ssh-agent -s)"
-   ssh-add ~/.ssh/id_rsa
+This script will help you:
+- Copy existing SSH keys from your host
+- Or generate new SSH keys in the container
+- Configure SSH for GitHub/GitLab
+- Test your SSH connection
 
-   # Windows (PowerShell)
-   Start-Service ssh-agent
-   ssh-add ~\.ssh\id_rsa
-   ```
-
-2. Your SSH keys are automatically available in the container:
-   ```bash
-   # Test SSH connection
-   ssh -T git@github.com
-   ```
-
-**Note:** SSH keys are mounted read-only for security. The container never modifies your host SSH configuration.
+**Note:** This is optional. You can also use HTTPS for Git operations.
 
 ## Available Services
 
@@ -190,34 +174,22 @@ symfony console doctrine:fixtures:load
 ```
 .
 ├── .devcontainer/
-│   ├── devcontainer.json    # DevContainer configuration
-│   ├── docker-compose.yml   # Services (Redis, Mailhog)
-│   ├── Dockerfile           # PHP Container Image
-│   └── post-create.sh       # Setup script
+│   ├── devcontainer.json           # DevContainer configuration
+│   ├── docker-compose.yml          # Docker Compose setup
+│   ├── Dockerfile                  # PHP 8.2 Container Image
+│   └── add_ssh_key_forwarding.sh   # Optional SSH setup script
 ├── .idea/
-│   ├── php.xml              # PHP 8.2 configuration
-│   ├── php-debug.xml        # Xdebug settings
-│   ├── symfony2.xml         # Symfony plugin activation
-│   ├── dataSources.xml      # Database templates
-│   ├── inspectionProfiles/  # Code quality standards
-│   └── runConfigurations/   # Preconfigured run configs
-├── .env.local.example       # Example environment variables
-├── .gitignore               # Git ignore rules
-└── README.md                # This file
+│   ├── php.xml                     # PHP 8.2 configuration
+│   ├── php-debug.xml               # Xdebug settings
+│   ├── symfony2.xml                # Symfony plugin activation
+│   ├── dataSources.xml             # Database templates
+│   ├── inspectionProfiles/         # Code quality standards
+│   └── runConfigurations/          # Preconfigured run configs
+├── .env.local.example              # Example environment variables
+├── .gitignore                      # Git ignore rules
+└── README.md                       # This file
 ```
 
-## Optional: Claude Code CLI
-
-The DevContainer includes a script to install Claude Code CLI for AI-assisted development:
-
-```bash
-bash .devcontainer/install_claude_cli.sh
-```
-
-This will install:
-- **Claude Code CLI** - AI-assisted coding with Claude
-
-**Note:** Symfony CLI is already preinstalled in the container.
 
 ## Customization
 
@@ -238,7 +210,7 @@ Edit `.devcontainer/docker-compose.yml` and add new services.
 ## Troubleshooting
 
 ### Port Already in Use
-If port 8000, 8025, or 6379 is already in use, adjust the ports in `docker-compose.yml`.
+If port 8000 or 9003 is already in use, adjust the ports in `docker-compose.yml`.
 
 ### Composer/npm Errors
 Make sure permissions are correct:
