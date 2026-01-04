@@ -8,36 +8,11 @@ services:
     volumes:
       - ../..:/workspaces:cached
     command: sleep infinity
-    network_mode: service:redis
+    ports:
+      - "8000:8000"
+      - "9003:9003"
     environment:
-      # Redis configuration
-      REDIS_HOST: localhost
-      REDIS_PORT: 6379
-      # Mailhog configuration
-      MAILER_DSN: smtp://localhost:1025
       # Database URLs (examples - user can configure in .env.local)
       # DATABASE_URL: "mysql://user:pass@host:3306/dbname"
       # DATABASE_URL: "postgresql://user:pass@host:5432/dbname"
       # DATABASE_URL: "sqlite:///%kernel.project_dir%/var/data.db"
-
-  redis:
-    image: redis:7-alpine
-    restart: unless-stopped
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis-data:/data
-
-  mailhog:
-    image: mailhog/mailhog:latest
-    restart: unless-stopped
-    network_mode: service:redis
-    environment:
-      MH_STORAGE: maildir
-      MH_MAILDIR_PATH: /maildir
-    volumes:
-      - mailhog-data:/maildir
-
-volumes:
-  redis-data:
-  mailhog-data:

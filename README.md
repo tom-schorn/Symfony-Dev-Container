@@ -7,8 +7,6 @@ A complete DevContainer for Symfony 7.4 development with PHP 8.2, optimized for 
 - **PHP 8.2** based on Debian Bookworm
 - **Symfony 7.4** ready with all recommended extensions
 - **Multi-Database Support**: MySQL, PostgreSQL, SQLite (PDO drivers installed)
-- **Redis** for caching and session storage
-- **Mailhog** for email testing in development
 - **Node.js & npm/yarn** for Symfony Webpack Encore
 - **Xdebug** preconfigured for PHPStorm
 - **Symfony CLI** preinstalled
@@ -119,32 +117,13 @@ The DevContainer automatically forwards your SSH keys from the host machine, all
 | Service | Port | Description |
 |---------|------|-------------|
 | Symfony Dev Server | 8000 | Main application |
-| Mailhog Web UI | 8025 | Email testing interface |
-| Redis | 6379 | Cache & Session Store |
 | Xdebug | 9003 | PHP Debugger for PHPStorm |
-
-### Mailhog
-
-All emails sent by the Symfony project are captured by Mailhog and can be viewed at http://localhost:8025.
-
-The mailer configuration is already set in docker-compose.yml:
-```env
-MAILER_DSN=smtp://localhost:1025
-```
-
-### Redis
-
-Redis is available at `localhost:6379`. Configuration in `.env.local`:
-
-```env
-REDIS_URL=redis://localhost:6379
-```
 
 ## Installed PHP Extensions
 
 - **Database**: mysql, pgsql, sqlite3
 - **Symfony Essentials**: intl, mbstring, xml, curl, zip
-- **Performance**: opcache, apcu, redis
+- **Performance**: opcache, apcu
 - **Development**: xdebug
 - **Additional**: gd, bcmath
 

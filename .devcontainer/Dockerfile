@@ -36,7 +36,6 @@ RUN apt-get update && apt-get install -y \
     php8.2-bcmath \
     php8.2-opcache \
     # Additional useful extensions
-    php8.2-redis \
     php8.2-apcu \
     php8.2-xdebug \
     # Node.js (for Symfony Webpack Encore)
