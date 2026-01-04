@@ -82,6 +82,38 @@ symfony server:start
 
 The application will be available at http://localhost:8000.
 
+## SSH Key Forwarding
+
+The DevContainer automatically forwards your SSH keys from the host machine, allowing you to:
+- Push/pull from Git repositories without re-entering credentials
+- Use SSH authentication for Composer packages from private repositories
+- Access remote servers via SSH
+
+**How it works:**
+- Your `~/.ssh` directory is mounted into the container
+- The SSH agent socket is forwarded automatically
+- All SSH keys and configurations are available inside the container
+
+**Setup:**
+1. Ensure your SSH agent is running on your host machine:
+   ```bash
+   # Linux/macOS
+   eval "$(ssh-agent -s)"
+   ssh-add ~/.ssh/id_rsa
+
+   # Windows (PowerShell)
+   Start-Service ssh-agent
+   ssh-add ~\.ssh\id_rsa
+   ```
+
+2. Your SSH keys are automatically available in the container:
+   ```bash
+   # Test SSH connection
+   ssh -T git@github.com
+   ```
+
+**Note:** SSH keys are mounted read-only for security. The container never modifies your host SSH configuration.
+
 ## Available Services
 
 | Service | Port | Description |
