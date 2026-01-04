@@ -206,6 +206,19 @@ symfony console doctrine:fixtures:load
 └── README.md                # This file
 ```
 
+## Optional: Claude Code CLI
+
+The DevContainer includes a script to install Claude Code CLI for AI-assisted development:
+
+```bash
+bash .devcontainer/install_claude_cli.sh
+```
+
+This will install:
+- **Claude Code CLI** - AI-assisted coding with Claude
+
+**Note:** Symfony CLI is already preinstalled in the container.
+
 ## Customization
 
 ### Add More PHP Extensions
