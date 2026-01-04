@@ -9,8 +9,3 @@ services:
     ports:
       - "8000:8000"
       - "9003:9003"
-    environment:
-      # Database URLs (examples - user can configure in .env.local)
-      # DATABASE_URL: "mysql://user:pass@host:3306/dbname"
-      # DATABASE_URL: "postgresql://user:pass@host:5432/dbname"
-      # DATABASE_URL: "sqlite:///%kernel.project_dir%/var/data.db"
